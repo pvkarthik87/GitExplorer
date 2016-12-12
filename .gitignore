@@ -38,3 +38,11 @@ captures/
 
 # Keystore files
 *.jks
+GitExplorer/.idea/compiler.xml
+GitExplorer/.idea/encodings.xml
+GitExplorer/.idea/gradle.xml
+GitExplorer/.idea/misc.xml
+GitExplorer/.idea/modules.xml
+GitExplorer/.idea/runConfigurations.xml
+GitExplorer/.idea/vcs.xml
+GitExplorer/.idea/copyright/profiles_settings.xml
