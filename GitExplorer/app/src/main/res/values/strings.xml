@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GitExplorer</string>
+    <string name="git_users">Git Users</string>
+    <string name="user_profile">Profile</string>
 </resources>
