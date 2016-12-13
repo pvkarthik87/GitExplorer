@@ -6,6 +6,7 @@ package com.karcompany.views.fragments;
  * Cars fragment which displays server data in a recycler view.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -24,10 +25,8 @@ import com.karcompany.models.UserMetaData;
 import com.karcompany.presenters.BrowseUsersPresenter;
 import com.karcompany.presenters.ViewType;
 import com.karcompany.views.BrowseUsersView;
+import com.karcompany.views.activities.UserProfileActivity;
 import com.karcompany.views.adapters.BrowseUsersAdapter;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -41,7 +40,7 @@ public class BrowseUsersFragment extends BaseFragment implements BrowseUsersView
 	private static final String CURRENT_VIEW_TYPE = "CURRENT_VIEW_TYPE";
 
 	@Bind(R.id.user_list)
-	RecyclerView mCarsDataView;
+	RecyclerView mUserRecyclerView;
 
 	@Inject
 	BrowseUsersPresenter mBrowseUsersPresenter;
@@ -70,8 +69,7 @@ public class BrowseUsersFragment extends BaseFragment implements BrowseUsersView
 		}
 		setUpPresenter();
 		setUpFabBtn();
-		setUpRecyclerView();
-		mAdapter = new BrowseUsersAdapter(this, mCarsDataView);
+		mAdapter = new BrowseUsersAdapter(this, mUserRecyclerView);
 		setUpRecyclerView();
 		mAdapter.enableLoadMore();
 	}
@@ -84,13 +82,13 @@ public class BrowseUsersFragment extends BaseFragment implements BrowseUsersView
 		if(mCurrentViewType == ViewType.LIST) {
 			LinearLayoutManager layoutManager = new LinearLayoutManager(
 					getActivity(), LinearLayoutManager.VERTICAL, false);
-			mCarsDataView.setLayoutManager(layoutManager);
+			mUserRecyclerView.setLayoutManager(layoutManager);
 		} else {
 			GridLayoutManager layoutManager = new GridLayoutManager(
 					getActivity(), 2);
-			mCarsDataView.setLayoutManager(layoutManager);
+			mUserRecyclerView.setLayoutManager(layoutManager);
 		}
-		mCarsDataView.setAdapter(mAdapter);
+		mUserRecyclerView.setAdapter(mAdapter);
 	}
 
 	@Override
@@ -133,7 +131,7 @@ public class BrowseUsersFragment extends BaseFragment implements BrowseUsersView
 
 	@Override
 	public void onDestroyView() {
-		mCarsDataView.setAdapter(null);
+		mUserRecyclerView.setAdapter(null);
 		super.onDestroyView();
 	}
 
@@ -148,7 +146,7 @@ public class BrowseUsersFragment extends BaseFragment implements BrowseUsersView
 	}
 
 	@OnClick(R.id.fabbutton)
-	public void onFbSendBtnClicked() {
+	public void onToogleViewClicked() {
 		if(mCurrentViewType == ViewType.LIST) {
 			mCurrentViewType = ViewType.GRID;
 		} else {
@@ -168,12 +166,15 @@ public class BrowseUsersFragment extends BaseFragment implements BrowseUsersView
 
 	@Override
 	public void onUserSelected(UserMetaData userMetaData) {
-
+		Intent intent = new Intent(getActivity(), UserProfileActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		startActivity(intent);
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+		outState.putString(CURRENT_VIEW_TYPE, mCurrentViewType.getCode());
 		outState.putString(CURRENT_VIEW_TYPE, mCurrentViewType.getCode());
 	}
 }

@@ -1,6 +1,7 @@
 package com.karcompany.networking;
 
 import com.karcompany.logging.DefaultLogger;
+import com.karcompany.models.RepositoryDetails;
 import com.karcompany.models.UserDetails;
 import com.karcompany.models.UserMetaData;
 
@@ -88,6 +89,36 @@ public class ApiRepo {
 				});
 	}
 
+	public Subscription getUserRepositories(String url, final UserReposCallback callback) {
+		return mRestService.getUserRepositories(url)
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribeOn(Schedulers.newThread())
+				.onErrorResumeNext(new Func1<Throwable, Observable<? extends RepositoryDetails[]>>() {
+					@Override
+					public Observable<? extends RepositoryDetails[]> call(Throwable throwable) {
+						return Observable.error(throwable);
+					}
+				})
+				.subscribe(new Subscriber<RepositoryDetails[]>() {
+					@Override
+					public void onCompleted() {
+						DefaultLogger.d(TAG, "onCompleted");
+					}
+
+					@Override
+					public void onError(Throwable e) {
+						DefaultLogger.d(TAG, "onError");
+						callback.onError(new NetworkError(e));
+					}
+
+					@Override
+					public void onNext(RepositoryDetails[] response) {
+						DefaultLogger.d(TAG, "onNext");
+						callback.onSuccess(response);
+					}
+				});
+	}
+
 	public interface UserListCallback {
 		void onSuccess(UserMetaData[] response);
 
@@ -96,6 +127,12 @@ public class ApiRepo {
 
 	public interface UserDataCallback {
 		void onSuccess(UserDetails response);
+
+		void onError(NetworkError networkError);
+	}
+
+	public interface UserReposCallback {
+		void onSuccess(RepositoryDetails[] response);
 
 		void onError(NetworkError networkError);
 	}

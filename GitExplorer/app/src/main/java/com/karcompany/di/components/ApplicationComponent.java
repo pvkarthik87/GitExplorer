@@ -7,8 +7,12 @@ import com.karcompany.di.modules.ApplicationModule;
 import com.karcompany.networking.NetworkModule;
 import com.karcompany.views.activities.BaseActivity;
 import com.karcompany.views.activities.BrowseUsersActivity;
+import com.karcompany.views.adapters.BrowseUserReposAdapter;
 import com.karcompany.views.adapters.BrowseUsersAdapter;
 import com.karcompany.views.fragments.BrowseUsersFragment;
+import com.karcompany.views.fragments.UserProfileFragment;
+import com.karcompany.views.fragments.UserProfileHeaderFragment;
+import com.karcompany.views.fragments.UserRepositoriesFragment;
 
 import javax.inject.Singleton;
 
@@ -31,6 +35,14 @@ public interface ApplicationComponent {
 	void inject(BrowseUsersFragment browseUsersFragment);
 
 	void inject(BrowseUsersAdapter browseUsersAdapter);
+
+	void inject(UserProfileFragment userProfileFragment);
+
+	void inject(UserProfileHeaderFragment userProfileHeaderFragment);
+
+	void inject(UserRepositoriesFragment userRepositoriesFragment);
+
+	void inject(BrowseUserReposAdapter browseUserReposAdapter);
 	
 	//Exposed to sub-graphs.
 	Context context();

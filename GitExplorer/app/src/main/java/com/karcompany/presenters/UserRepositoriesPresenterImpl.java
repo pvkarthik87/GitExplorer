@@ -1,9 +1,11 @@
 package com.karcompany.presenters;
 
+import com.karcompany.models.RepositoryDetails;
 import com.karcompany.models.UserMetaData;
 import com.karcompany.networking.ApiRepo;
 import com.karcompany.networking.NetworkError;
-import com.karcompany.views.BrowseUsersView;
+import com.karcompany.views.UserProfileHeaderView;
+import com.karcompany.views.UserRepositoriesView;
 
 import javax.inject.Inject;
 
@@ -16,28 +18,29 @@ import rx.subscriptions.CompositeSubscription;
  * Presenter implementation which handles core features.
  */
 
-public class BrowseUsersPresenterImpl implements BrowseUsersPresenter, ApiRepo.UserListCallback {
+public class UserRepositoriesPresenterImpl implements UserRepositoriesPresenter, ApiRepo.UserReposCallback {
 
-	private BrowseUsersView mView;
+	private UserRepositoriesView mView;
 
 	@Inject
 	ApiRepo mApiRepo;
 
+	private BrowseUsersPresenter mBrowseUsersPresenter;
+
 	private boolean mIsLoading;
 	private CompositeSubscription subscriptions;
-	private UserMetaData mSelectedUser;
 
 	@Inject
-	public BrowseUsersPresenterImpl(ApiRepo apiRepo) {
+	public UserRepositoriesPresenterImpl(ApiRepo apiRepo, BrowseUsersPresenter browseUsersPresenter) {
 		mApiRepo = apiRepo;
+		mBrowseUsersPresenter = browseUsersPresenter;
 		this.subscriptions = new CompositeSubscription();
 	}
 
 	@Override
-	public void setView(BrowseUsersView browseUsersView) {
-		mView = browseUsersView;
+	public void setView(UserRepositoriesView headerView) {
+		mView = headerView;
 		subscriptions = new CompositeSubscription();
-		mSelectedUser = null;
 	}
 
 	@Override
@@ -62,34 +65,13 @@ public class BrowseUsersPresenterImpl implements BrowseUsersPresenter, ApiRepo.U
 	@Override
 	public void onDestroy() {
 		mView = null;
-		mSelectedUser = null;
 		if(subscriptions != null) {
 			subscriptions.unsubscribe();
 		}
 	}
 
 	@Override
-	public boolean isLoading() {
-		return mIsLoading;
-	}
-
-	@Override
-	public void loadPage(long pageNo) {
-		mIsLoading = true;
-		Subscription subscription = mApiRepo.getUserList(pageNo, this);
-		subscriptions.add(subscription);
-	}
-
-	@Override
-	public void onUserSelected(UserMetaData userMetaData) {
-		mSelectedUser = userMetaData;
-		if(mView != null) {
-			mView.onUserSelected(userMetaData);
-		}
-	}
-
-	@Override
-	public void onSuccess(UserMetaData[] response) {
+	public void onSuccess(RepositoryDetails[] response) {
 		mIsLoading = false;
 		if (mView != null) {
 			mView.onDataReceived(response);
@@ -105,7 +87,12 @@ public class BrowseUsersPresenterImpl implements BrowseUsersPresenter, ApiRepo.U
 	}
 
 	@Override
-	public UserMetaData getCurrentUser() {
-		return mSelectedUser;
+	public void loadData() {
+		UserMetaData currentSelectedUser = mBrowseUsersPresenter.getCurrentUser();
+		if(currentSelectedUser != null) {
+			mIsLoading = true;
+			Subscription subscription = mApiRepo.getUserRepositories(currentSelectedUser.getReposUrl(), this);
+			subscriptions.add(subscription);
+		}
 	}
 }

@@ -1,12 +1,14 @@
 package com.karcompany.networking;
 
 import com.karcompany.config.Constants;
+import com.karcompany.models.RepositoryDetails;
 import com.karcompany.models.UserDetails;
 import com.karcompany.models.UserMetaData;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -22,5 +24,8 @@ public interface RestService {
 
 	@GET("/users/{userName}")
 	Observable<UserDetails> getUserDetails(@Path("userName") String userName);
+
+	@GET
+	Observable<RepositoryDetails[]> getUserRepositories(@Url String url);
 
 }

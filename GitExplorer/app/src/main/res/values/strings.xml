@@ -2,4 +2,7 @@
     <string name="app_name">GitExplorer</string>
     <string name="git_users">Git Users</string>
     <string name="user_profile">Profile</string>
+    <string name="user_followers">Followers</string>
+    <string name="user_following">Following</string>
+    <string name="user_repositories">Repositories Contributed</string>
 </resources>
