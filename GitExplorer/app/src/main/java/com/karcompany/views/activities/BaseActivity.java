@@ -1,7 +1,7 @@
 package com.karcompany.views.activities;
 
 /**
- * Created by pvkarthik on 2016-12-05.
+ * Created by pvkarthik on 2016-12-12.
  *
  * BaseActivity which all other activities should inherit to simplify DI .
  */

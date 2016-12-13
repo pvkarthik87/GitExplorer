@@ -1,7 +1,7 @@
 package com.karcompany.views.fragments;
 
 /**
- * Created by pvkarthik on 2016-12-05.
+ * Created by pvkarthik on 2016-12-12.
  *
  * BaseFragment from which other fragments extend to Simplify DI, view injections.
  */

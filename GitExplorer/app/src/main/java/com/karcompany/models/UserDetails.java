@@ -1,7 +1,7 @@
 package com.karcompany.models;
 
 /**
- * Created by sammyer on 2016-12-12.
+ * Created by pvkarthik on 2016-12-12.
  */
 
 import com.google.gson.annotations.Expose;

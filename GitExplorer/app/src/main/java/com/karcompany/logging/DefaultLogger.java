@@ -1,7 +1,7 @@
 package com.karcompany.logging;
 
 /**
- * Created by pvkarthik on 2016-12-05.
+ * Created by pvkarthik on 2016-12-12.
  *
  * Main Logger class.
  * Every class should use these functions instead of default Android logging.

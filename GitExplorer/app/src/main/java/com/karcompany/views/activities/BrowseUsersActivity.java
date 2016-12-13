@@ -1,7 +1,7 @@
 package com.karcompany.views.activities;
 
 /**
- * Created by pvkarthik on 2016-12-05.
+ * Created by pvkarthik on 2016-12-12.
  *
  * Initial launch activity which will get displayed on first launch of application.
  */

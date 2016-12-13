@@ -1,7 +1,7 @@
 package com.karcompany.models;
 
 /**
- * Created by pvkarthik on 2016-12-06.
+ * Created by pvkarthik on 2016-12-12.
  *
  * Generic class (JSON Pojo).
  * A Pojo which represents data received from server.

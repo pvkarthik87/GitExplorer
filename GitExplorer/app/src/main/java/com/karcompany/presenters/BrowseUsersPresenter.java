@@ -5,7 +5,7 @@ import com.karcompany.mvputils.Presenter;
 import com.karcompany.views.BrowseUsersView;
 
 /**
- * Created by pvkarthik on 2016-12-05.
+ * Created by pvkarthik on 2016-12-12.
  *
  * Presenter interface.
  *

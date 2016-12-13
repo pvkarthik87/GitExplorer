@@ -1,7 +1,7 @@
 package com.karcompany.views.adapters;
 
 /**
- * Created by pvkarthik on 2016-12-05.
+ * Created by pvkarthik on 2016-12-12.
  *
  * Recycler view adapter which displays data.
  */

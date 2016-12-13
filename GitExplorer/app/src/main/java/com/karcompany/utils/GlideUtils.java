@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by sammyer on 2016-08-12.
+ * Created by pvkarthik on 2016-12-12.
  */
 public class GlideUtils {
 

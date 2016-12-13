@@ -1,7 +1,7 @@
 package com.karcompany.views.fragments;
 
 /**
- * Created by pvkarthik on 2016-12-05.
+ * Created by pvkarthik on 2016-12-12.
  *
  * Cars fragment which displays server data in a recycler view.
  */
