@@ -74,9 +74,9 @@ public class BrowseUsersPresenterImpl implements BrowseUsersPresenter, ApiRepo.U
 	}
 
 	@Override
-	public void loadPage(long pageNo) {
+	public void loadUsers(long since) {
 		mIsLoading = true;
-		Subscription subscription = mApiRepo.getUserList(pageNo, this);
+		Subscription subscription = mApiRepo.getUserList(since, this);
 		subscriptions.add(subscription);
 	}
 

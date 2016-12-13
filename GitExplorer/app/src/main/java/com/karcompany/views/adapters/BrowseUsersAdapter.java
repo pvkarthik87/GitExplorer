@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.karcompany.GitExplorerApplication;
 import com.karcompany.R;
-import com.karcompany.config.Constants;
 import com.karcompany.models.UserMetaData;
 import com.karcompany.presenters.BrowseUsersPresenter;
 import com.karcompany.utils.GlideUtils;
@@ -30,9 +29,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 public class BrowseUsersAdapter extends RecyclerView.Adapter<UserListItemViewHolder> {
-
-	private static final int VIEW_TYPE_ODD = 100;
-	private static final int VIEW_TYPE_EVEN = 101;
 
 	private Fragment mFragment;
 	private Context mContext;
@@ -157,7 +153,7 @@ public class BrowseUsersAdapter extends RecyclerView.Adapter<UserListItemViewHol
 
 	public void loadData() {
 		if(!isAllPagesLoaded()) {
-			mBrowseUsersPresenter.loadPage(getReqPageNumber());
+			mBrowseUsersPresenter.loadUsers(getReqPageNumber());
 		}
 	}
 

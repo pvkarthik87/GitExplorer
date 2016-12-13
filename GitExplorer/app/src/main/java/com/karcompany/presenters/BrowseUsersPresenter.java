@@ -17,7 +17,7 @@ public interface BrowseUsersPresenter extends Presenter {
 
 	boolean isLoading();
 
-	void loadPage(long pageNo);
+	void loadUsers(long since);
 
 	void onUserSelected(UserMetaData userMetaData);
 
