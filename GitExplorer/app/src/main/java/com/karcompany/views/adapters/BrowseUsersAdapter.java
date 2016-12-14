@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.karcompany.GitExplorerApplication;
 import com.karcompany.R;
 import com.karcompany.models.UserMetaData;
@@ -44,9 +45,7 @@ public class BrowseUsersAdapter extends RecyclerView.Adapter<UserListItemViewHol
 		@Override
 		public void onClick(View view) {
 			int itemPosition = (Integer) view.getTag();
-			//int itemPosition = mRecyclerView.getChildLayoutPosition(view);
 			Long item = mDataList.get(itemPosition);
-			//Toast.makeText(mContext, item, Toast.LENGTH_LONG).show();
 			mBrowseUsersPresenter.onUserSelected(mDataMap.get(item));
 		}
 	};
@@ -79,12 +78,13 @@ public class BrowseUsersAdapter extends RecyclerView.Adapter<UserListItemViewHol
 		}
 		holder.itemView.setTag(position);
 		holder.itemView.setOnClickListener(mOnClickListener);
-		/*if(position > mLastPosition) {
-			Animation animation = AnimationUtils.loadAnimation(mContext,
-					R.anim.up_bottom);
-			holder.itemView.startAnimation(animation);
-			mLastPosition = position;
-		}*/
+	}
+
+	@Override
+	public void onViewRecycled(UserListItemViewHolder holder) {
+		Glide.clear(holder.profileImgView);
+		holder.profileImgView.setImageDrawable(null);
+		super.onViewRecycled(holder);
 	}
 
 	@Override
