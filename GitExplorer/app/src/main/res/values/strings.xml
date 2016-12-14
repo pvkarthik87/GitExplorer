@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">GitExplorer</string>
-    <string name="git_users">Git Users</string>
-    <string name="user_profile">Profile</string>
-    <string name="user_followers">Followers</string>
-    <string name="user_following">Following</string>
-    <string name="user_repositories">Repositories Contributed</string>
+    <string name="app_name" translatable="false">GitExplorer</string>
+    <string name="git_users" translatable="false">Git Users</string>
+    <string name="user_profile" translatable="false">Profile</string>
+    <string name="user_followers" translatable="false">Followers</string>
+    <string name="user_following" translatable="false">Following</string>
+    <string name="user_repositories" translatable="false">Repositories Contributed</string>
 </resources>
